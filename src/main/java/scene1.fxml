@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MemoryGame.FXMLController">
+   <children>
+      <Pane layoutX="1.0" prefHeight="550" prefWidth="800">
+         <children>
+            <Label layoutX="286.0" layoutY="197.0" text="Üdvözöllek a Memória Játékban!" />
+            <Label layoutX="256.0" layoutY="265.0" text="Név:" />
+            <TextField fx:id="nameText" layoutX="306.0" layoutY="260.0" />
+            <Button layoutX="371.0" layoutY="300.0" mnemonicParsing="false" onAction="#onStartClicked" text="Start!" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
