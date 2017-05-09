@@ -22,18 +22,14 @@ public class FXMLController implements Initializable {
     private Label label;
     
     @FXML
-    private Label nameLabel;
-    @FXML
-    private TextField nameText;
-    
-    @FXML
     private Button Start;
-    
 
+    	
+    	
+    
     @FXML
     private void onStartClicked(ActionEvent event) {
-    	System.out.println("Hello " +nameText.getText());
-    	String name = nameText.getText();
+    	System.out.println("Hello");
             
             new Thread() {
                 @Override

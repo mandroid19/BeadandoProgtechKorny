@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -107,19 +109,20 @@ public class GameLauncher extends Application {
                     	i++;
                     	System.out.println("Találat! Eddigi párok száma: "+i);
                     	if(i==1){System.out.println("Mindent megtaláltál! Gratulálok!");
-                    	
-						try {
-							Parent root;
-							root = FXMLLoader.load(getClass().getResource("/sceneEnd.fxml"));
-							  Scene endScene = new Scene(root);
-							  Mainstage.setTitle("blabla");
-		                        Mainstage.setScene(endScene);
-		                        Mainstage.show();
-						} catch (IOException e) {
+                    	try {
+							start2(primaryStage);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+                		
+              
+                    	 
+                			
+                		
+						
                       
-                        }
+                        } 
                     
                     	
                     	
@@ -154,4 +157,14 @@ public class GameLauncher extends Application {
        
 
  }
+
+	public void start2(Stage primaryStage) throws Exception {
+		Pane endScene = (Pane) FXMLLoader.load(getClass().getResource("/sceneEnd.fxml"));
+                    	        Mainstage.setScene(new Scene(endScene));
+                    	        Mainstage.setTitle("Memory Game End");
+                    	        Mainstage.show();
+                    	        
+                    	        
+                    	  
+                    	    }
 }
