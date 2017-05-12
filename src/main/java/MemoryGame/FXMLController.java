@@ -29,7 +29,7 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void onStartClicked(ActionEvent event) {
-    	System.out.println("Hello");
+    	
             
             new Thread() {
                 @Override

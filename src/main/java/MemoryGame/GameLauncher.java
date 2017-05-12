@@ -1,12 +1,20 @@
 package MemoryGame;
+import java.awt.Label;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -24,18 +32,25 @@ import javafx.util.Duration;
 
 public class GameLauncher extends Application {
 
-    private static final int NUM_OF_PAIRS = 60;
+    private static final int NUM_OF_PAIRS = 2;
     private static final int NUM_PER_ROW = 12;
     public  static Stage Mainstage = new Stage();
     private Tile selected = null;
     private int clickCount = 2;
     Stage primaryStage;
     int i=0; 
+    public  static  int timepassed = 0;
+    private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(GameLauncher.class);
+   
+    TimerScheduler scTimer = new TimerScheduler();
+
+    
     private Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(800, 550);
-
-        char c = 'A';
+      logger.info("Elkeszult a játék!");
+     
+     char c = 'A';
         List<Tile> tiles = new ArrayList<>();
         for (int i = 0; i < NUM_OF_PAIRS; i++) {
             tiles.add(new Tile(String.valueOf(c)));
@@ -50,7 +65,7 @@ public class GameLauncher extends Application {
             tile.setTranslateX(50 * (i % NUM_PER_ROW));
             tile.setTranslateY(50 * (i / NUM_PER_ROW));
             root.getChildren().add(tile);
-          
+           
         }
 
         return root;
@@ -58,10 +73,20 @@ public class GameLauncher extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+    	scTimer.restart();
+  scTimer.start();
+ primaryStage.setOnCloseRequest(event -> {
+	  logger.info("Stage bezárul");
+	  scTimer.end();
+	  Platform.exit();
+	});
         Mainstage.setScene(new Scene(createContent()));
         Mainstage.setTitle("MemoryGame");
         Mainstage.show();
-        
+       
+      //  Mainstage.setOnCloseRequest(e -> Platform.exit());
+        Mainstage.setOnCloseRequest(e -> scTimer.end());
         
   
     }
@@ -100,33 +125,31 @@ public class GameLauncher extends Application {
             else {
                 open(() -> {
                     if (!hasSameValue(selected)) {
-                        System.out.println("Nincs találat");
+                        logger.info("Nincs találat");
                     	selected.close();
                         this.close();
                         
                     }
                     else{
                     	i++;
-                    	System.out.println("Találat! Eddigi párok száma: "+i);
-                    	if(i==1){System.out.println("Mindent megtaláltál! Gratulálok!");
+                    	logger.info("Találat! Eddigi párok száma: "+i);
+                    	if(i==NUM_OF_PAIRS){logger.info("Mindent megtaláltál! Gratulálok!");
                     	try {
+                    		
 							start2(primaryStage);
+							scTimer.end();
+						
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
-                		
-              
-                    	 
-                			
-                		
-						
+						 	 				  }
+
                       
-                        } 
-                    
+	                        }	 
+	                    
                     	
                     	
-                    }
+                    	}
                     selected = null;
                     clickCount = 2;
                 });
@@ -163,6 +186,7 @@ public class GameLauncher extends Application {
                     	        Mainstage.setScene(new Scene(endScene));
                     	        Mainstage.setTitle("Memory Game End");
                     	        Mainstage.show();
+                    	        Mainstage.setOnCloseRequest(e -> Platform.exit());
                     	        
                     	        
                     	  

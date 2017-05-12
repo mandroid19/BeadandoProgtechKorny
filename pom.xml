@@ -6,20 +6,288 @@
   <artifactId>Beadando</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-
-  <name>Beadando</name>
-  <url>http://maven.apache.org</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <description>Memory Game</description>
+    <licenses>
+        <license>
+            <name>GPLv3</name>
+            <url>http://www.gnu.org/copyleft/gpl.html</url>
+        </license>
+    </licenses>
+    <inceptionYear>2017</inceptionYear>
+    <organization>
+        <name>Debreceni Egyetem, Informatikai Kar</name>
+    </organization>
+    <developers>
+        <developer>
+            <id>mandroid19</id>
+            <email>mandroid19@gmail.hu</email>
+            <organization>Debreceni Egyetem, Informatikai Kar</organization>
+            <organizationUrl>http://w1.inf.unideb.hu/</organizationUrl>
+            <roles>
+                <role>fejlesztő</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:https://github.com/mandroid19/BeadandoProgtechKorny.git</connection>
+        <url>https://github.com/mandroid19/BeadandoProgtechKorny</url>
+    </scm>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+        <mainClass>MemoryGame.MemoryGame</mainClass>
+    
   </properties>
-
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+  
+<dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency> 
+        <dependency> 
+            <groupId>org.slf4j</groupId> 
+            <artifactId>slf4j-api</artifactId> 
+            <version>1.7.21</version> 
+        </dependency> 
+        <dependency> 
+            <groupId>org.slf4j</groupId> 
+            <artifactId>slf4j-jdk14</artifactId> 
+            <version>1.7.21</version> 
+            <scope>runtime</scope> 
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.1.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.7</version>
+            <scope>compile</scope>
+        </dependency>
+       
   </dependencies>
+  
+  	 <build>
+        <plugins>
+
+
+        <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <version>2.10</version>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+          <outputDirectory>${project.build.directory}/lib</outputDirectory>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <version>3.0.2</version>
+    <configuration>
+        <archive>
+            <manifest>
+                <addClasspath>true</addClasspath>
+                <classpathPrefix>lib/</classpathPrefix>
+                <mainClass>MemoryGame.MemoryGame</mainClass>
+            </manifest>
+        </archive>
+    </configuration>
+</plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>enforce-java-version</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>1.8</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-shade-plugin</artifactId>
+<version>3.0.0</version>
+<executions>
+<execution>
+<goals>
+<goal>shade</goal>
+</goals>
+<phase>package</phase>
+<configuration>
+<transformers>
+<transformer
+implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+<mainClass>MemoryGame.MemoryGame</mainClass>
+</transformer>
+</transformers>
+<shadedArtifactAttached>true</shadedArtifactAttached>
+</configuration>
+</execution>
+</executions>
+</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.4</version>
+                <configuration>
+                    <outputEncoding>UTF-8</outputEncoding>
+                    <locales>hu</locales>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <mainClass>${mainClass}</mainClass>
+                </configuration>
+            </plugin>
+             
+             
+           <!--   <plugin>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <configuration>
+        <archive>
+          <manifest>
+            <mainClass>MemoryGame.MemoryGame</mainClass>
+          </manifest>
+        </archive>
+        <descriptorRefs>
+          <descriptorRef>jar-with-dependencies</descriptorRef>
+        </descriptorRefs>
+      </configuration>
+    </plugin> -->
+            
+             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifest>
+                                	<addClasspath>true</addClasspath>
+                                    <mainClass>MemoryGame.MemoryGame</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> 
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>8.1.2</version>
+                <configuration>
+                    <mainClass>${mainClass}</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <instrumentation>					
+                        <excludes>
+                            <exclude>MemoryGame.FXMLcontrollerEndScene.class</exclude>
+                            <exclude>MemoryGame.FXMLController.class</exclude>
+                        </excludes>						
+                    </instrumentation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <configuration>
+                    <show>private</show>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.18.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.15</version>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <instrumentation>					
+                        <excludes>
+                            <exclude>MemoryGame.FXMLcontrollerEndScene.class</exclude>
+                            <exclude>MemoryGame.FXMLController.class</exclude>
+                        </excludes>						
+                    </instrumentation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>	
 </project>

@@ -1,5 +1,8 @@
 Manifest-Version: 1.0
 Built-By: mandr
+Class-Path: lib/slf4j-api-1.7.21.jar lib/slf4j-jdk14-1.7.21.jar lib/lo
+ gback-core-1.1.7.jar lib/logback-classic-1.1.7.jar
 Build-Jdk: 1.8.0_131
 Created-By: Maven Integration for Eclipse
+Main-Class: MemoryGame.MemoryGame
 
