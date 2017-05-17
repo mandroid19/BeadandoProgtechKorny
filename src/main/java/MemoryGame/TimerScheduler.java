@@ -8,18 +8,28 @@ public class TimerScheduler {
 	    
 	    Timer timer = new Timer();
 	    TimerTask task = new TimerTask() {
+	       
 	        @Override       
 	        public void run() {
 	            GameLauncher.timepassed++;
 	            logger.info("Másodperc eltelt: "+GameLauncher.timepassed);
 	        }
 	    }; 
+	    /**
+	     * Elindítj a timert
+	     */
 	    public void start(){
 	        timer.scheduleAtFixedRate(task, 1000, 1000);
 	    }   
+	    /**
+	     * Megállítja a timert
+	     */
 	    public void end(){
 	        timer.cancel();
 	    }
+	    /**
+	     * Újraindítja a timert
+	     */
 	    public void restart(){
 	    	GameLauncher.timepassed = 0;
 	    }

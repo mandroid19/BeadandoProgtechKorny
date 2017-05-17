@@ -30,6 +30,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * @author mandr
+ *
+ */
+
+
 public class GameLauncher extends Application {
 
     private static final int NUM_OF_PAIRS = 2;
@@ -45,6 +51,10 @@ public class GameLauncher extends Application {
     TimerScheduler scTimer = new TimerScheduler();
 
     
+    /**
+     * Elkészíti magát a játék felületet.
+     * @return
+     */
     private Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(800, 550);
@@ -71,6 +81,7 @@ public class GameLauncher extends Application {
         return root;
     }
 
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -84,16 +95,18 @@ public class GameLauncher extends Application {
         Mainstage.setScene(new Scene(createContent()));
         Mainstage.setTitle("MemoryGame");
         Mainstage.show();
-       
-      //  Mainstage.setOnCloseRequest(e -> Platform.exit());
         Mainstage.setOnCloseRequest(e -> scTimer.end());
         
   
     }
 
+    
     private class Tile extends StackPane {
         private Text text = new Text();
 
+        /**
+         * A Tile-ök jellemzőit állítja be.
+         */
         public Tile(String value) {
             Rectangle border = new Rectangle(50, 50);
             border.setFill(null);
@@ -109,6 +122,11 @@ public class GameLauncher extends Application {
             close();
         }
 
+        /**
+         * A játékban lévő klikkeléseket kezeli.
+         * Továbbá vizsgája hány párat talált meg a játékos, megadja a viselkedését
+         * a tile-öknek.
+         */
         public void handleMouseClick(MouseEvent event) {
         	   	
         	if (isOpen() || clickCount == 0)
@@ -156,10 +174,17 @@ public class GameLauncher extends Application {
             }
         }
 
+        /**
+         * Eldönti, hogy a Tile tartalma látható e.
+         */
         public boolean isOpen() {
             return text.getOpacity() == 1;
         }
 
+        /**
+         * Animálja a Tile-ökben lévő betűket,írásjeleket.
+         * Megjeleníti őket.
+         */
         public void open(Runnable action) {
             FadeTransition ft = new FadeTransition(Duration.seconds(0.3), text);
             ft.setToValue(1);
@@ -167,12 +192,19 @@ public class GameLauncher extends Application {
             ft.play();
         }
 
+        /**
+         * Animálja a Tile-ökben lévő betűket,írásjeleket. 
+         * Eltünteti őket.
+         */
         public void close() {
             FadeTransition ft = new FadeTransition(Duration.seconds(0.3), text);
             ft.setToValue(0);
             ft.play();
         }
 
+        /**
+         * Vizsgálja, hogy 2 Tile tartalma azonos-e.
+         */
         public boolean hasSameValue(Tile other) {
         	
             return text.getText().equals(other.text.getText());
@@ -181,6 +213,10 @@ public class GameLauncher extends Application {
 
  }
 
+	/**
+	 * Betölti az utolsó scene-t.
+	 *
+	 */
 	public void start2(Stage primaryStage) throws Exception {
 		Pane endScene = (Pane) FXMLLoader.load(getClass().getResource("/sceneEnd.fxml"));
                     	        Mainstage.setScene(new Scene(endScene));

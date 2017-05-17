@@ -25,16 +25,20 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * @author mandr
+ *
+ */
 public class MemoryGame extends Application {
   
   
     public  static Stage Mainstage = new Stage();
 
 
+  
     @Override
     public void start(Stage primaryStage) throws Exception {
-  /////// FXML betöltő  	
-    Pane startPane = (Pane) FXMLLoader.load(MemoryGame.class.getResource("/scene1.fxml"));
+     Pane startPane = (Pane) FXMLLoader.load(MemoryGame.class.getResource("/scene1.fxml"));
     Mainstage.setScene(new Scene(startPane));
     Mainstage.setTitle("MemoryGame Start");
     Mainstage.show();
