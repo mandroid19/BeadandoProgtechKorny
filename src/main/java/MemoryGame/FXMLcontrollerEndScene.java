@@ -26,20 +26,17 @@ public class FXMLcontrollerEndScene  implements Initializable {
 	    private Label hnev2;
 	    
 	    @FXML
-	    private Label hnev3;
-	    
-	    @FXML
 	    private Label hpont1;
-	    
+	    @FXML
+	    private Label bajnokLabel;
 	    
 	    @FXML
 	    private Label hpont2;
 	    
 	    @FXML
-	    private Label hpont3;
-	    
-	    @FXML
 	    private Label grat;
+	    @FXML
+	    private Label nevhibakieg;
 	    @FXML
 	    public Button SaveButton;
 	    @FXML
@@ -92,30 +89,44 @@ public class FXMLcontrollerEndScene  implements Initializable {
 	   private void eredmenyOnClick(ActionEvent event){
 		 
 		   GameSave.Load();
-		   nevhiba.setText("Eredmények betöltve!");
+		   if (GameSave.loaded){
+		   hnev2.setText(GameSave.usr);
+		   hpont2.setText(GameSave.time+" second(s)");
+		   nevhiba.setText("Bajnok betöltve!");
+		   bajnokLabel.setText("Bajnok: ");
+		   nevhibakieg.setText("");
+		   }else{
+			   nevhiba.setText("Még nincs bajnok!");
+		   }
 		  
 	   }
 	   
 	   @FXML
 	   private void SaveButtonClick(ActionEvent event){
 		  
-		  
+		   if(Pname.getText().toString().length() >= 10){
+			   nevhiba.setText("Túl hosszú név! Maximum 10 karakter hosszút adj meg!");
+		   }else{
 		   if (!(Pname.getText().isEmpty())){
-			   GameSave.PlayerName = Pname.getText();
+			   GameSave.PlayerName = Pname.getText().toString();
+			
 			   SaveButton.setDisable(true);
 		   GameSave.Save();
+		   if(GameSave.bajnok){
 		   nevhiba.setText("Játékos "+GameSave.PlayerName + " elmentve!");
-		
+		   }else{ nevhiba.setText("Sajnos nem győzted le a bajnokot :( " );
+		   nevhibakieg.setText("A bajnok megtekintéséhez kattints a Mutasd a bajnokot gombra!");}
 		  }else{
 			  GameSave.PlayerName = null;
 			nevhiba.setText("Írj be egy nevet!");
 	   }
 		   
-	   }
+	   }}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		hpont1.setText(GameLauncher.timepassed + " second(s)"); 
+		bajnokLabel.setText(" ");
 	}
 
 }

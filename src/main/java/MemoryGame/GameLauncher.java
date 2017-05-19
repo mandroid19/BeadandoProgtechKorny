@@ -84,7 +84,7 @@ public class GameLauncher extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+    	
     	scTimer.restart();
   scTimer.start();
  primaryStage.setOnCloseRequest(event -> {
