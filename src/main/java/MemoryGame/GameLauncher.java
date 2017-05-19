@@ -38,7 +38,7 @@ import javafx.util.Duration;
 
 public class GameLauncher extends Application {
 
-    private static final int NUM_OF_PAIRS = 2;
+    private static final int NUM_OF_PAIRS = 36;
     private static final int NUM_PER_ROW = 12;
     public  static Stage Mainstage = new Stage();
     private Tile selected = null;
@@ -57,7 +57,7 @@ public class GameLauncher extends Application {
      */
     private Parent createContent() {
         Pane root = new Pane();
-        root.setPrefSize(800, 550);
+        root.setPrefSize(721, 361);
       logger.info("Elkeszult a játék!");
      
      char c = 'A';
@@ -72,8 +72,8 @@ public class GameLauncher extends Application {
 
         for (int i = 0; i < tiles.size(); i++) {
             Tile tile = tiles.get(i);
-            tile.setTranslateX(50 * (i % NUM_PER_ROW));
-            tile.setTranslateY(50 * (i / NUM_PER_ROW));
+            tile.setTranslateX(60 * (i % NUM_PER_ROW));
+            tile.setTranslateY(60 * (i / NUM_PER_ROW));
             root.getChildren().add(tile);
            
         }
@@ -108,7 +108,7 @@ public class GameLauncher extends Application {
          * A Tile-ök jellemzőit állítja be.
          */
         public Tile(String value) {
-            Rectangle border = new Rectangle(50, 50);
+            Rectangle border = new Rectangle(60, 60);
             border.setFill(null);
             border.setStroke(Color.BLACK);
 
