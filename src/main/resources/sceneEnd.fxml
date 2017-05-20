@@ -70,7 +70,7 @@
                   <Font size="26.0" />
                </font>
             </Label>
-            <Label layoutX="57.0" layoutY="407.0" text="Figyelem! Csak akkor mentődik el a neved, ha rövidebb idő alatt találod meg az összes párt, mint a bajnok!" />
+            <Label alignment="CENTER" layoutX="57.0" layoutY="407.0" text="Figyelem! Csak akkor mentődik el a neved, ha rövidebb idő alatt találod meg az összes párt, mint a bajnok!" textAlignment="CENTER" />
          </children>
       </Pane>
    </children>
