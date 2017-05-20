@@ -60,10 +60,10 @@ public static void Save(){
 	       transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 	       Document doc = builder.newDocument();
 	       DOMSource source = new DOMSource(doc);
-	       File f = new File("D:\\output.xml");
+	       File f = new File("./output.xml");
 	       if(f.exists() && !f.isDirectory()) { 
 	           logger.info("Lézetik ilyen file!");
-	           StreamResult file = new StreamResult("D:\\output.xml");
+	           StreamResult file = new StreamResult("./output.xml");
 	           DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 	           Load();
 	           int num = Integer.parseInt(time);
@@ -96,9 +96,9 @@ public static void Save(){
 	    	 elapsedTime = GameLauncher.timepassed;
 	    	logger.info("nincs uj bajnok");}
 	    }else 
-	       {  StreamResult file = new StreamResult(new File("D:\\output.xml"));
+	       {  StreamResult file = new StreamResult(new File("./output.xml"));
 	
-	       
+	       bajnok = true;
 	       Element rootElement = doc.createElement("Jatekosok");
 	       doc.appendChild(rootElement);
 
@@ -110,7 +110,8 @@ public static void Save(){
 		      time.appendChild(doc.createTextNode(et.toString()));
 		       rootElement.appendChild(time);
 		       elapsedTime = GameLauncher.timepassed;
-	   
+	   logger.info("Uj adatbazis elkeszult a bajnokkal!");
+	   logger.info("Elso bajnok: "+PlayerName+ " elmentve!");
 	       try {
 			transformer.transform(source, file);
 		} catch (TransformerException e) {
@@ -134,7 +135,7 @@ public static void Save(){
  */
 public static void Load(){
   
-	File file = new File("D:/output.xml");
+	File file = new File("./output.xml");
 	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 	if(file.exists() && !file.isDirectory()) { 
         logger.info("Lézetik ilyen file!");

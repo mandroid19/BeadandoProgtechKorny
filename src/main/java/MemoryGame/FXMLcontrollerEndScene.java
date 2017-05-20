@@ -104,7 +104,7 @@ public class FXMLcontrollerEndScene  implements Initializable {
 	   @FXML
 	   private void SaveButtonClick(ActionEvent event){
 		  
-		   if(Pname.getText().toString().length() >= 10){
+		   if(Pname.getText().toString().length() > 10){
 			   nevhiba.setText("Túl hosszú név! Maximum 10 karakter hosszút adj meg!");
 		   }else{
 		   if (!(Pname.getText().isEmpty())){
