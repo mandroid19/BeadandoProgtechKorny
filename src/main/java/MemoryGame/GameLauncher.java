@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
@@ -139,6 +140,12 @@ public class GameLauncher extends Application {
             if (selected == null) {
                 selected = this;
                 open(() -> {});
+                try {
+					TimeUnit.SECONDS.sleep((long) 0.7);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
             else {
                 open(() -> {
@@ -170,6 +177,8 @@ public class GameLauncher extends Application {
                     	}
                     selected = null;
                     clickCount = 2;
+               
+                    
                 });
             }
         }
