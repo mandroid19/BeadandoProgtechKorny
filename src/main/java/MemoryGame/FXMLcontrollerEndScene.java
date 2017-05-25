@@ -1,5 +1,5 @@
 package MemoryGame;
-
+//CHECKSTYLE:OFF
 import java.net.URL;
 import java.util.ResourceBundle;
 

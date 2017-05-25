@@ -31,11 +31,17 @@ import javafx.util.Duration;
  */
 public class MemoryGame extends Application {
   
-  
-    public  static Stage Mainstage = new Stage();
+
+
+
+	public  static Stage Mainstage = new Stage();
 
 
   
+    /* (non-Javadoc)
+     * Betölti az első scene-t.
+     * @see javafx.application.Application#start(javafx.stage.Stage)
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
      Pane startPane = (Pane) FXMLLoader.load(MemoryGame.class.getResource("/scene1.fxml"));
@@ -46,6 +52,10 @@ public class MemoryGame extends Application {
     }
 
    
+    /**
+     * Elindítja az applikációt.
+     * @param args standard argumentumok
+     */
     public static void main(String[] args) {
        Application.launch(args);
     }
