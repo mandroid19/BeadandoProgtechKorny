@@ -85,7 +85,6 @@ public class GameLauncher extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-    	
     	scTimer.restart();
   scTimer.start();
  primaryStage.setOnCloseRequest(event -> {
@@ -141,7 +140,8 @@ public class GameLauncher extends Application {
                 selected = this;
                 open(() -> {});
                 try {
-					TimeUnit.SECONDS.sleep((long) 0.7);
+					//TimeUnit.SECONDS.sleep((long) 0.7);
+                	Thread.sleep(300);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
