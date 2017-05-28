@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
+
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -32,19 +34,26 @@ import javafx.util.Duration;
  */
 public class GameLauncher extends Application {
 
-    private static final int NUM_OF_PAIRS = 36;
-    private static final int NUM_PER_ROW = 12;
+    public static final int NUM_OF_PAIRS = 36;
+    public static final int NUM_PER_ROW = 12;
     public  static Stage Mainstage = new Stage();
-    private Tile selected = null;
-    private int clickCount = 2;
-    Stage primaryStage;
-    int i=0; 
+    public static Tile selected = null;
+    public static int clickCount = 2;
+    static Stage primaryStage;
+    public static int i=0; 
     public  static  int timepassed = 0;
     private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(GameLauncher.class);
-   
-    TimerScheduler scTimer = new TimerScheduler();
 
-    
+   static TimerScheduler scTimer = new TimerScheduler();
+	  // TimerScheduler scTimer2 = new TimerScheduler();
+    /**
+     * Létrehoz egy új timert.
+     * @return új timert
+     */
+    TimerScheduler ti(){
+	   return scTimer = new TimerScheduler();
+   }
+	
     /**
      * Elkészíti magát a játék felületet.
      * @return  a felületet 
@@ -52,7 +61,7 @@ public class GameLauncher extends Application {
     private Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(721, 361);
-      logger.info("Elkeszult a játék!");
+      
      
      char c = 'A';
         List<Tile> tiles = new ArrayList<>();
@@ -80,159 +89,32 @@ public class GameLauncher extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-    	scTimer.restart();
-  scTimer.start();
- primaryStage.setOnCloseRequest(event -> {
-	  logger.info("Stage bezárul");
-	  scTimer.end();
-	  Platform.exit();
-	});
-        Scene scene  = new Scene(createContent());
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if (key.getCode() == KeyCode.UP) {
-                try {
-                	scTimer.end();
-					start2(primaryStage);
-					
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-            }
-        });
-        Mainstage.setScene(scene);
-        Mainstage.setTitle("MemoryGame");
-        Mainstage.show();
-        Mainstage.setOnCloseRequest(e -> scTimer.end());
-    }
-    
-    /**
-     * A lapokat létrehozó és eseményvezérlő osztály.
-     *
-     */
-    public class Tile extends StackPane {
-        private Text text = new Text();
-
-        /**
-         * A Tile-ök jellemzőit állítja be.
-         * @param value a lapkához rendelendő betű
-         */
-        public Tile(String value) {
-            Rectangle border = new Rectangle(60, 60);
-            border.setFill(null);
-            border.setStroke(Color.BLACK);
-
-            text.setText(value);
-            text.setFont(Font.font(30));
-           
-            setAlignment(Pos.CENTER);
-            getChildren().addAll(border, text);
-
-            setOnMouseClicked(this::handleMouseClick);
-            close();
-        }
-
-        /**
-         * A játékban lévő klikkeléseket kezeli.
-         * Továbbá vizsgája hány párat talált meg a játékos, megadja a viselkedését
-         * a tile-öknek.
-         * @param event klikkelés
-         */
-        public void handleMouseClick(MouseEvent event) {
-        	   	
-        	if (isOpen() || clickCount == 0)
-        		
-        		return;
-
-            clickCount--;
-            
-
-            if (selected == null) {
-                selected = this;
-                open(() -> {});
-               try {
-					//TimeUnit.SECONDS.sleep((long) 0.7);
-                	Thread.sleep(300);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-            else {
-                open(() -> {
-                    if (!hasSameValue(selected)) {
-                        logger.info("Nincs találat");
-                    	selected.close();
-                        this.close();
-                        
-                    }
-                    else{
-                    	i++;
-                    	logger.info("Találat! Eddigi párok száma: "+i);
-                    	if(i==NUM_OF_PAIRS){logger.info("Mindent megtaláltál! Gratulálok!");
-                    	try {
-                    		
-							start2(primaryStage);
-							scTimer.end();
-						
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						 	 				  }
-
-	                        }	 
-	                   
-                    	}
-                    selected = null;
-                    clickCount = 2; 
-                });
-            }
-        }
-        /**
-         * Eldönti, hogy a Tile tartalma látható e.
-         * @return true vagy false 
-         * 	{@code true} a lapka tartalma látható
-         * 	{@code false} a lapka tartalma nem látható
-         */
-        public boolean isOpen() {
-            return text.getOpacity() == 1;
-        }
-
-        /**
-         * Megjeleníti a Tile-ökben lévő betűket,írásjeleket.
-         * @param action lapkára való kattintás 
-         *
-         */
-        public void open(Runnable action) {
-            FadeTransition ft = new FadeTransition(Duration.seconds(0.3), text);
-            ft.setToValue(1);
-            ft.setOnFinished(e -> action.run());
-            ft.play();
-        }
-
-        /**
-         * Elfedi a Tile-ökben lévő betűket,írásjeleket. 
-         * Eltünteti őket.
-         */
-        public void close() {
-            FadeTransition ft = new FadeTransition(Duration.seconds(0.3), text);
-            ft.setToValue(0);
-            ft.play();
-        }
-
-        /**
-         * Vizsgálja, hogy 2 lapka tartalma azonos-e.
-         * 
-         * @param other a másik lapka tartalma
-         * @return boolean kifejezést hogy a két kiválaszott lapka megegyezik-e.
-         */
-        public boolean hasSameValue(Tile other) {
-        	
-            return text.getText().equals(other.text.getText());
-        }
-       
-
- }
+    	ti();
+        scTimer.restart();
+    	scTimer.start();
+    	 primaryStage.setOnCloseRequest(event -> {
+    		  logger.info("Stage bezárul");
+    		  scTimer.end();
+    		  Platform.exit();
+    		});
+    	        Scene scene  = new Scene(createContent());
+    	        Mainstage.setScene(scene);
+    	        Mainstage.setTitle("MemoryGame");
+    	        Mainstage.show();
+    	        Mainstage.setOnCloseRequest(e -> scTimer.end());
+    	        logger.info("Elkeszult a játék!");
+    	        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+    	            if (key.getCode() == KeyCode.UP) {
+    	                try {
+    	                	scTimer.end();
+    						start2(primaryStage);
+    						logger.info("Fejlesztői mód aktiválva!");
+    					} catch (Exception e1) {
+    						// TODO Auto-generated catch block
+    						e1.printStackTrace();
+    					}
+    	            }
+    	        });}
 
 	/**
 	 * Betölti az utolsó scene-t.

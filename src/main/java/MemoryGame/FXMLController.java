@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,14 +24,10 @@ public class FXMLController implements Initializable {
     
     @FXML
     private Button Start;
-
-    	
-    	
     
     @FXML
     private void onStartClicked(ActionEvent event) {
-    	
-            
+    
             new Thread() {
                 @Override
                 public void run() {
@@ -41,8 +38,7 @@ public class FXMLController implements Initializable {
                     	@Override
                     	public void run(){
                     		try {
-                    			new GameLauncher().start(new Stage());
-                    			
+                    		new GameLauncher().start(new Stage());   
                     		}catch (Exception e){
                     			e.printStackTrace();
                     		}
@@ -53,7 +49,7 @@ public class FXMLController implements Initializable {
                 		e.printStackTrace();
                 	}
                 }
-            }.start();    
+            }.start();  
     }
     
     @Override

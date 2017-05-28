@@ -34,6 +34,7 @@ public static String vizsTime;
 public static boolean loaded;
 static Document doc = null;
 static StreamResult file = null;
+public static int inditott;
 private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(GameSave.class);
 /**
  * Ellenőrzi, hogy létezik-e már a bajnokot tartalmazó xml fájl,

@@ -27,11 +27,11 @@ public class TimerScheduler {
 	    public void start(){
 	        timer.scheduleAtFixedRate(task, 1000, 1000);
 	    }   
-	    
+	  
 	    /**
 	     * Megállítja a timert.
 	     */
-	    public void end(){
+	    public  void end(){
 	        timer.cancel();
 	    }
 	    
