@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
+ * Elindítja magát az alkalmazást (az első scene-t).
  * @author mandr
  *
  */

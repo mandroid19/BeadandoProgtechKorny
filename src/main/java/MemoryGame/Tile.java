@@ -1,6 +1,9 @@
 package MemoryGame;
 
 
+import org.slf4j.LoggerFactory;
+
+
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +18,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 /**
  * A lapokat létrehozó és eseményvezérlő osztály.
  *
  */
 public class Tile extends StackPane {
-        private Text text = new Text();
+	private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(Tile.class);        
+	private Text text = new Text();
 
         /**
          * A Tile-ök jellemzőit állítja be.
@@ -70,15 +75,15 @@ public class Tile extends StackPane {
             else {
                 open(() -> {
                     if (!hasSameValue(GameLauncher.selected)) {
-                        //logger.info("Nincs találat");
+                        logger.info("Nincs találat");
                     	GameLauncher.selected.close();
                         this.close();
                         
                     }
                     else{
                     	GameLauncher.i++;
-                    	//logger.info("Találat! Eddigi párok száma: "+i);
-                    	if(GameLauncher.i==GameLauncher.NUM_OF_PAIRS){//logger.info("Mindent megtaláltál! Gratulálok!");
+						logger.info("Találat! Eddigi párok száma: "+GameLauncher.i);
+                    	if(GameLauncher.i==GameLauncher.NUM_OF_PAIRS){logger.info("Mindent megtaláltál! Gratulálok!");
                     	try {
                     		
                     		start2(GameLauncher.primaryStage);
@@ -140,6 +145,11 @@ public class Tile extends StackPane {
             return text.getText().equals(other.text.getText());
         }
        
+        /**
+         * Betölti az utolsó scene-t.
+         * @param primaryStage maga a stage neve
+         * @throws Exception ha van exception
+         */
         public void start2(Stage primaryStage) throws Exception {
         	Pane endScene = (Pane) FXMLLoader.load(getClass().getResource("/sceneEnd.fxml"));
                         	       GameLauncher.Mainstage.setScene(new Scene(endScene));

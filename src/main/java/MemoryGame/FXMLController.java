@@ -17,6 +17,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Első scene FXML controllere.
+ * @author mandr
+ *
+ */
 public class FXMLController implements Initializable {
     
     @FXML
@@ -25,6 +30,10 @@ public class FXMLController implements Initializable {
     @FXML
     private Button Start;
     
+    /**
+     * A start gomb megnyomására betölti a játék scenet.
+     * @param event
+     */
     @FXML
     private void onStartClicked(ActionEvent event) {
     

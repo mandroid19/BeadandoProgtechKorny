@@ -24,6 +24,11 @@ import org.xml.sax.SAXException;
 
 import com.sun.media.jfxmedia.logging.Logger;
 
+/**
+ * Mentéseket és betöltéseket tartalmaz.
+ * @author mandr
+ *
+ */
 public class GameSave {
 public static int elapsedTime = GameLauncher.timepassed;
 public static boolean bajnok;

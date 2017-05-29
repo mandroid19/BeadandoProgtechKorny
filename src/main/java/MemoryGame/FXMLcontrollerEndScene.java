@@ -16,6 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * Az utolsó scene FXML controllere.
+ * @author mandr
+ *
+ */
 public class FXMLcontrollerEndScene  implements Initializable {
 	    @FXML
 	    private Label nevIde;
@@ -59,6 +64,10 @@ public class FXMLcontrollerEndScene  implements Initializable {
 	    	Platform.exit();
 	    }
 	    
+	    /**
+	     * Új játék gombra kattintására betölti a játék felületet.
+	     * @param event 
+	     */
 	    @FXML
 	    private void b_newGameOnClick(ActionEvent event) {
 	    	   new Thread() {
@@ -85,7 +94,11 @@ public class FXMLcontrollerEndScene  implements Initializable {
 	                }
 	            }.start();    
 	    }
-	   @FXML
+	   /**
+	    * Vizsgálja, hogy van-e bajnok, ha van betölti.
+	 * @param event
+	 */
+	@FXML
 	   private void eredmenyOnClick(ActionEvent event){
 		 
 		   GameSave.Load();
@@ -101,7 +114,13 @@ public class FXMLcontrollerEndScene  implements Initializable {
 		  
 	   }
 	   
-	   @FXML
+	   /**
+	    * Vizsgálja hogy a bevitt név maximum 10 karakteres lehet.
+	    * Vizsgálja hogy van-e egyátalán beírt név.
+	    * Elmenti a játékost, ha az ideje kisebb mint a bajnoké.
+	 * @param event
+	 */
+	@FXML
 	   private void SaveButtonClick(ActionEvent event){
 		  
 		   if(Pname.getText().toString().length() > 10){
@@ -122,6 +141,9 @@ public class FXMLcontrollerEndScene  implements Initializable {
 	   }
 		   
 	   }}
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub

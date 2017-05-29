@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
  * @author mandr
  */
 public class TimerScheduler {
-	private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(GameSave.class);
+	private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(TimerScheduler.class);
 	    
 	    Timer timer = new Timer();
 	    TimerTask task = new TimerTask() {

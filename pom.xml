@@ -253,9 +253,6 @@ implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransfor
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.10.3</version>
-                <configuration>
-                    <show>private</show>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
