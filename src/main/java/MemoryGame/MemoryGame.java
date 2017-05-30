@@ -35,6 +35,9 @@ public class MemoryGame extends Application {
 
 
 
+	/**
+	 * Staget létrehozza.
+	 */
 	public  static Stage Mainstage = new Stage();
 
 

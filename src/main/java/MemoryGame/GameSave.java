@@ -29,24 +29,41 @@ import com.sun.media.jfxmedia.logging.Logger;
  * @author mandr
  *
  */
-public class GameSave {
+public class GameSave implements GameDAO{
+/**
+ * Az eltelt másodperceket tárolja.
+ */
 public static int elapsedTime = GameLauncher.timepassed;
+/**
+ * Igaz hamis hogy van-e bajnok.
+ */
 public static boolean bajnok;
+/**
+ * A játékos nevét tartalmazza.
+ */
 public static String PlayerName;
+/**
+ * A bajnok nevét tartalmazza.
+ */
 public static String usr;
+/**
+ * A bajnok idejét tartalmazza.
+ */
 public static String time = null;
-public static String vizsTime;
+/**
+ * Igaz Hamis hogy betöltött-e a bajnokot tartalmazó xml.
+ */
 public static boolean loaded;
 static Document doc = null;
 static StreamResult file = null;
-public static int inditott;
 private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(GameSave.class);
 /**
  * Ellenőrzi, hogy létezik-e már a bajnokot tartalmazó xml fájl,
  * ha igen, akkor eldönti, hogy hamarabb végzett-e a játékos, mint a bajnok,
  * ha igen elmenti őt új bajnokként, ha nem akkor nincs mentés.
  */
-public static void Save(){
+@Override
+public void Saving(){
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = null;
     
@@ -71,7 +88,7 @@ public static void Save(){
 	           logger.info("Lézetik ilyen file!");
 	           StreamResult file = new StreamResult("./output.xml");
 	           DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-	           Load();
+	           Loading();
 	           int num = Integer.parseInt(time);
 	           if(num > elapsedTime){
 	           bajnok = true;
@@ -136,10 +153,11 @@ public static void Save(){
 
 
 /**
- * Ellenőrzi, hogy létezik-e már a bajnokot tartalmazó xml, ha igen
- * betölti a bajnok nevét és idejét
+ * Ellenőrzi, hogy létezik-e már a bajnokot tartalmazó xml. 
+ * Ha igenbetölti a bajnok nevét és idejét.
  */
-public static void Load(){
+@Override
+public void Loading(){
   
 	File file = new File("./output.xml");
 	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

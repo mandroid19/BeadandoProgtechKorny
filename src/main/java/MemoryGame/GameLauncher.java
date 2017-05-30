@@ -34,13 +34,34 @@ import javafx.util.Duration;
  */
 public class GameLauncher extends Application {
 
+    /**
+     * A párok számát tárolja.
+     */
     public static final int NUM_OF_PAIRS = 36;
+    /**
+     * A sorok számát adja meg, ennyivel osztja a párok számát.
+     */
     public static final int NUM_PER_ROW = 12;
+    /**
+     * A stage neve.
+     */
     public  static Stage Mainstage = new Stage();
+    /**
+     * Kiválasztott lapocska inicializálása.
+     */
     public static Tile selected = null;
+    /**
+     * Kattintások számát tárolja.
+     */
     public static int clickCount = 2;
     static Stage primaryStage;
+    /**
+     * A megtalált párok számát tárolja.
+     */
     public static int i=0; 
+    /**
+     * az eltelt másodperceket tárolja.
+     */
     public  static  int timepassed = 0;
     private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(GameLauncher.class);
 

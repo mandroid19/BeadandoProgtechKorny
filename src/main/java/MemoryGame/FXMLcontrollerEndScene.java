@@ -43,7 +43,7 @@ public class FXMLcontrollerEndScene  implements Initializable {
 	    @FXML
 	    private Label nevhibakieg;
 	    @FXML
-	    public Button SaveButton;
+	    private Button SaveButton;
 	    @FXML
 	    private Button eredmeny;
 	    
@@ -54,7 +54,7 @@ public class FXMLcontrollerEndScene  implements Initializable {
 	    private Button b_newGame;
 	    
 	    @FXML
-	    public TextField Pname;
+	    private TextField Pname;
 	    
 	    @FXML
 	    private Label ido_label;
@@ -63,7 +63,7 @@ public class FXMLcontrollerEndScene  implements Initializable {
 	    	
 	    	Platform.exit();
 	    }
-	    
+            private GameSave GS = new GameSave();
 	    /**
 	     * Új játék gombra kattintására betölti a játék felületet.
 	     * @param event 
@@ -101,7 +101,7 @@ public class FXMLcontrollerEndScene  implements Initializable {
 	@FXML
 	   private void eredmenyOnClick(ActionEvent event){
 		 
-		   GameSave.Load();
+		   GS.Loading();
 		   if (GameSave.loaded){
 		   hnev2.setText(GameSave.usr);
 		   hpont2.setText(GameSave.time+" second(s)");
@@ -130,7 +130,7 @@ public class FXMLcontrollerEndScene  implements Initializable {
 			   GameSave.PlayerName = Pname.getText().toString();
 			
 			   SaveButton.setDisable(true);
-		   GameSave.Save();
+		   GS.Saving();
 		   if(GameSave.bajnok){
 		   nevhiba.setText("Játékos "+GameSave.PlayerName + " elmentve!");
 		   }else{ nevhiba.setText("Sajnos nem győzted le a bajnokot :( " );

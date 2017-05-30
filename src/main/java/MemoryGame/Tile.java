@@ -52,7 +52,7 @@ public class Tile extends StackPane {
          * a tile-öknek.
          * @param event klikkelés
          */
-        public void handleMouseClick(MouseEvent event) {
+        private void handleMouseClick(MouseEvent event) {
         	   	
         	if (isOpen() || GameLauncher.clickCount == 0)
         		
@@ -117,7 +117,7 @@ public class Tile extends StackPane {
          * @param action lapkára való kattintás 
          *
          */
-        public void open(Runnable action) {
+        private void open(Runnable action) {
             FadeTransition ft = new FadeTransition(Duration.seconds(0.3), text);
             ft.setToValue(1);
             ft.setOnFinished(e -> action.run());
@@ -128,7 +128,7 @@ public class Tile extends StackPane {
          * Elfedi a Tile-ökben lévő betűket,írásjeleket. 
          * Eltünteti őket.
          */
-        public void close() {
+        private void close() {
             FadeTransition ft = new FadeTransition(Duration.seconds(0.3), text);
             ft.setToValue(0);
             ft.play();
