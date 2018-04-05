@@ -34,10 +34,6 @@ import javafx.util.Duration;
  */
 public class GameLauncher extends Application {
 
-	/**
-	 * A player nevét tartalmazza.
-	 */
-	public static String PlayerName; 
     /**
      * A párok számát tárolja.
      */
@@ -108,14 +104,7 @@ public class GameLauncher extends Application {
 
         return root;
     }
-/**
- * Visszaadja a játékos nevét és logger.
- * @return Játékos neve
- */
-public static String name(){
-	logger.info("Játékos eredmény betöltve!");
-	return PlayerName;
-}
+
     /* (non-Javadoc)
      * @see javafx.application.Application#start(javafx.stage.Stage)
      */

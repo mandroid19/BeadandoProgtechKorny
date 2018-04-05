@@ -11,16 +11,21 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MemoryGame.FXMLcontrollerEndScene">
    <children>
-      <Pane fx:id="end" layoutX="-3.0" prefHeight="550.0" prefWidth="802.0" style="-fx-background-color: #d3d3d3;">
+      <Pane layoutX="-3.0" prefHeight="550.0" prefWidth="802.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <Label fx:id="grat" layoutX="159.0" layoutY="55.0" text="Gratulálok! Megtaláltál minden párt!">
+            <Label fx:id="grat" layoutX="148.0" layoutY="45.0" text="Gratulálok! Megtaláltál minden párt!">
                <font>
                   <Font name="System Bold" size="29.0" />
                </font></Label>
-            <Label fx:id="nevIde" layoutX="268.0" layoutY="127.0" text="Írd be a neved:" />
-            <Label fx:id="idoeredmeny" layoutX="329.0" layoutY="332.0" prefHeight="51.0" prefWidth="203.0" textAlignment="RIGHT">
+            <Label fx:id="nevIde" layoutX="131.0" layoutY="127.0" text="Írd be a neved:" />
+            <Label fx:id="hnev2" layoutX="193.0" layoutY="334.0" textFill="#141414">
                <font>
-                  <Font size="21.0" />
+                  <Font name="System Bold" size="31.0" />
+               </font></Label>
+            <Label fx:id="hpont1" layoutX="526.0" layoutY="124.0" prefHeight="27.0" prefWidth="203.0" />
+            <Label fx:id="hpont2" layoutX="486.0" layoutY="334.0" prefHeight="21.0" prefWidth="203.0">
+               <font>
+                  <Font name="System Bold" size="31.0" />
                </font></Label>
             <Button fx:id="b_exit" layoutX="45.0" layoutY="428.0" mnemonicParsing="false" onAction="#b_exitOnClick" prefHeight="99.0" prefWidth="296.0" text="Kilépés">
                <font>
@@ -42,33 +47,30 @@
                <effect>
                   <InnerShadow />
                </effect></Button>
-            <TextField fx:id="Pname" layoutX="375.0" layoutY="122.0" />
-            <Label fx:id="ido_label" layoutX="221.0" layoutY="321.0" textAlignment="RIGHT">
-               <font>
-                  <Font size="43.0" />
-               </font></Label>
-            <Label fx:id="nevhiba" alignment="CENTER" layoutX="175.0" layoutY="241.0" prefHeight="21.0" prefWidth="469.0" textAlignment="JUSTIFY" />
-            <Button fx:id="eredmeny" layoutX="317.0" layoutY="180.0" mnemonicParsing="false" onAction="#eredmenyOnClick" prefHeight="51.0" prefWidth="186.0" text="Eredményem">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
+            <Button fx:id="eredmeny" layoutX="327.0" layoutY="260.0" mnemonicParsing="false" onAction="#eredmenyOnClick" text="Mutasd a bajnokot!">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <effect>
                   <InnerShadow />
-               </effect>
-            </Button>
-            <Label fx:id="jatekos" layoutX="175.0" layoutY="262.0" prefHeight="64.0" prefWidth="176.0" textAlignment="RIGHT">
+               </effect></Button>
+            <Button fx:id="SaveButton" layoutX="325.0" layoutY="168.0" mnemonicParsing="false" onAction="#SaveButtonClick" text="Eredmény mentése">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <InnerShadow />
+               </effect></Button>
+            <TextField fx:id="Pname" layoutX="248.0" layoutY="122.0" />
+            <Label fx:id="ido_label" layoutX="486.0" layoutY="127.0" text="Idő:" />
+            <Label fx:id="nevhiba" alignment="CENTER" layoutX="167.0" layoutY="199.0" prefHeight="21.0" prefWidth="469.0" textAlignment="JUSTIFY" />
+            <Label fx:id="nevhibakieg" alignment="CENTER" layoutX="167.0" layoutY="220.0" prefHeight="21.0" prefWidth="469.0" textAlignment="JUSTIFY" />
+            <Label fx:id="bajnokLabel" layoutX="90.0" layoutY="338.0" text="Bajnok:">
                <font>
-                  <Font size="43.0" />
+                  <Font size="26.0" />
                </font>
             </Label>
-            <Label fx:id="jatekosnev_kiir" layoutX="365.0" layoutY="277.0" textAlignment="RIGHT">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
+            <Label alignment="CENTER" layoutX="57.0" layoutY="407.0" text="Figyelem! Csak akkor mentődik el a neved, ha rövidebb idő alatt találod meg az összes párt, mint a bajnok!" textAlignment="CENTER" />
          </children>
       </Pane>
    </children>
